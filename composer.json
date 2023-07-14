@@ -1,0 +1,26 @@
+{
+    "name": "manychois/wess",
+    "autoload": {
+        "psr-4": {
+            "Manychois\\Wess\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Siu Pang Tommy Choi",
+            "email": "manychois@manychois.com.au"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "php-di/php-di": "^7.0"
+    },
+    "require-dev": {
+        "johnpbloch/wordpress": "^6.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "johnpbloch/wordpress-core-installer": true
+        }
+    }
+}
