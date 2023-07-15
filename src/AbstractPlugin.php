@@ -14,9 +14,9 @@ abstract class AbstractPlugin
     {
     }
 
-    public readonly string $file;
     public readonly string $baseUrl;
-    private readonly WpAppInterface $wp;
+    public readonly string $file;
+    public readonly WpAppInterface $wp;
 
     /**
      * Creates a new instance of the plugin.
