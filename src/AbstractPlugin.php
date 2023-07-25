@@ -7,13 +7,6 @@ namespace Manychois\Wess;
  */
 abstract class AbstractPlugin
 {
-    /**
-     * Called when the plugin is uninstalled.
-     */
-    public static function onUninstall(WpAppInterface $wp): void
-    {
-    }
-
     public readonly string $baseUrl;
     public readonly string $file;
     public readonly WpAppInterface $wp;
@@ -27,8 +20,6 @@ abstract class AbstractPlugin
         $this->file = $file;
         $this->baseUrl = plugins_url('', $file);
         $this->wp = $wp;
-        register_activation_hook($file, [$this, 'onActivate']);
-        register_deactivation_hook($file, [$this, 'onDeactivate']);
     }
 
     /**
@@ -43,5 +34,30 @@ abstract class AbstractPlugin
      */
     public function onDeactivate(): void
     {
+    }
+
+    /**
+     * Called when the plugin is initialized.
+     */
+    public function onInit(): void
+    {
+    }
+
+    /**
+     * Called when the plugin is uninstalled.
+     */
+    public function onUninstall(): void
+    {
+    }
+
+    /**
+     * Registers the first level hooks for the plugin.
+     */
+    public function registerFirstHooks(): void
+    {
+        $file = $this->file;
+        register_activation_hook($file, [$this, 'onActivate']);
+        register_deactivation_hook($file, [$this, 'onDeactivate']);
+        add_action('init', [$this, 'onInit']);
     }
 }
