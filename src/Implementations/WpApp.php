@@ -4,22 +4,38 @@ namespace Manychois\Wess\Implementations;
 
 use Manychois\Wess\WpActionsInterface;
 use Manychois\Wess\WpAppInterface;
+use Manychois\Wess\WpBlocksInterface;
+use Manychois\Wess\WpDependencyInterface;
 use Manychois\Wess\WpFiltersInterface;
 
 class WpApp implements WpAppInterface
 {
-    public readonly WpActions $wpActions;
-    public readonly WpFilters $wpFilters;
+    private readonly WpActions $wpActions;
+    private readonly WpBlocks $wpBlocks;
+    private readonly WpDependency $wpDependency;
+    private readonly WpFilters $wpFilters;
 
-    public function __construct(WpActions $wpActions, WpFilters $wpFilters)
+    public function __construct(WpAppArgs $args)
     {
-        $this->wpActions = $wpActions;
-        $this->wpFilters = $wpFilters;
+        $this->wpActions = $args->actions;
+        $this->wpBlocks = $args->blocks;
+        $this->wpDependency = $args->deps;
+        $this->wpFilters = $args->filters;
     }
 
     public function actions(): WpActionsInterface
     {
         return $this->wpActions;
+    }
+
+    public function blocks(): WpBlocksInterface
+    {
+        return $this->wpBlocks;
+    }
+
+    public function deps(): WpDependencyInterface
+    {
+        return $this->wpDependency;
     }
 
     public function filters(): WpFiltersInterface
